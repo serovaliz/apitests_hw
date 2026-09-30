@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "total": { "type": "integer" },
+    "used": { "type": "integer" },
+    "queued": { "type": "integer" },
+    "pending": { "type": "integer" },
+    "warmReady": { "type": "integer" },
+    "warmTotal": { "type": "integer" },
+    "hotReady": { "type": "integer" },
+    "hotTotal": { "type": "integer" },
+    "warmSlots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "browser": { "type": "string" },
+          "protocol": { "type": "string" },
+          "pool": { "type": "string" },
+          "reservedBy": { "type": ["string", "null"] }
+        },
+        "required": ["id", "browser", "protocol", "pool", "reservedBy"]
+      }
+    },
+    "hotSlots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "browser": { "type": "string" },
+          "protocol": { "type": "string" },
+          "pool": { "type": "string" },
+          "reservedBy": { "type": ["string", "null"] }
+        },
+        "required": ["id", "browser", "protocol", "pool", "reservedBy"]
+      }
+    },
+    "browsers": { "type": "object" }
+  },
+  "required": ["total", "used", "queued", "pending", "browsers"]
+}
