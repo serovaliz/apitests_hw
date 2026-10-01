@@ -13,7 +13,7 @@ public class WDHubStatusTests extends TestBase {
     String login = System.getProperty("selenoid.login", "user1");
     String password = System.getProperty("selenoid.password", "1234");
     @Test
-    public void wdHubstatusTest() {
+    public void wdHubAuthorizationTest() {
         given()
                 .log().all()
                 .header("Authorization", "Basic " +
@@ -22,17 +22,20 @@ public class WDHubStatusTests extends TestBase {
                 .get("/wd/hub/status")
                 .then()
                 .log().all()
-                .statusCode(200);
+                .statusCode(200)
+                .body("value.ready", is(true));
     }
     @Test
-    public void wdHubstatus401Test() {
+    public void wdHubNotAuthorizedTest() {
         given()
                 .log().all()
                 .when()
                 .get("/wd/hub/status")
                 .then()
                 .log().all()
-                .statusCode(401);
+                .statusCode(401)
+                .body(containsString("Authorization Required"));
+
     }
     @Test
     public void wdHubJsonSchemaTest() {
